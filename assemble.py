@@ -18,7 +18,7 @@ while True:
 		# define label
 		token = token[:-1]
 		if token in labels:
-			raise Exception('redefined label ' + token)
+			raise Exception(str(lexer.lineno) + ': redefined label ' + token)
 		else:
 			labels[token] = len(code)
 	elif token == 'res':	# reserve data
@@ -27,7 +27,7 @@ while True:
 		# Load immediate
 		value = int(lexer.get_token())
 		if value > 127 or value < -128:
-			raise Exception('value out of range')
+			raise Exception(str(lexer.lineno) + ': value out of range')
 		elif value < 0:
 			value = (0xff ^ (-value)) + 1	# Convert to twos complement
 
@@ -44,7 +44,7 @@ while True:
 	elif token == 'sub':
 		code += [ 0x100 | globals[lexer.get_token()] ]
 	else:
-		raise Exception('bad instruction' + token)
+		raise Exception(str(lexer.lineno) + ': bad instruction' + token)
 
 for addr, label in fixups:
 	code[addr] = (code[addr] & 0x300) | (labels[label] & 0xff)
