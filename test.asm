@@ -10,14 +10,21 @@ start:	ldi 8
 		st count
 
 loop:	ldi 0
-		add result
-		add count		# result = result + count
+		sub result
+		sub count	
+		st scratch
+		ldi 0			# Negate
+		sub scratch		
 		st result
 
-		ldi -1
-		add count		
+		ldi 1
+		sub count		
+		st scratch
+		ldi 0
+		sub scratch
 		st count		# count = count - 1
 		ble done
+		
 		ldi 0			# Branch unconditionally
 		ble loop
 

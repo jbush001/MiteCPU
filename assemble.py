@@ -41,7 +41,7 @@ while True:
 			code += [ 0x300 ]
 	elif token == 'st':
 		code += [ 0x200 | globals[lexer.get_token()] ]
-	elif token == 'add':
+	elif token == 'sub':
 		code += [ 0x100 | globals[lexer.get_token()] ]
 	else:
 		raise Exception('bad instruction' + token)

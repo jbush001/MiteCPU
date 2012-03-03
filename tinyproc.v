@@ -18,7 +18,7 @@ module tinyproc(input clk, output [7:0] result);
 	begin
 		case (instruction[9:8])
 			2'b00: accumulator <= instruction[7:0];	// Load immediate
-			2'b01: accumulator <= accumulator + data_mem[instruction[7:0]]; // Add
+			2'b01: accumulator <= accumulator - data_mem[instruction[7:0]]; // Sub
 			2'b10: data_mem[instruction[7:0]] = accumulator; // Store
 		endcase
 
