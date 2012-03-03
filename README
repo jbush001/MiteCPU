@@ -1,0 +1,13 @@
+This is a minimal computer that is nonetheless turing complete.  It has an 8 bit 
+accumulator register and 256 memory locations.  An instruction consists of a 
+2 bit opcode and a 8 bit operand.  There are four instruction types:
+
+   ST [location]  - Store the current value of the accumulator at the memory
+                    address specified.
+   ADD [location] - Add the accumulator to the value at the location and 
+                    store the result in the accumulator
+   LDI [value]    - Load an immediate value into the accumulator
+   BLE [target]   - If the accumulator is less than or equal to zero, branch
+                    to the target.
+
+Additionally, there is a 'res' keyword that will reserve a data variable.
