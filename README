@@ -16,6 +16,7 @@ Here are the instructions:
 011   ST [location]  - Store the current value of the accumulator at the memory
                        address specified.
 100   BL [target]    - If the accumulator is less than zero, branch to the target.
+101   INDEX [target] - Add the value to the next memory acccess address
 
 Additionally, there is a 'res' keyword that will reserve a data variable.  
 

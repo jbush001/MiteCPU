@@ -12,11 +12,13 @@ module tinyproc(input clk, output reg[7:0] result = 0);
 		for (i = 0; i < 255; i = i + 1) data_mem[i] = 0;
 	end
 
+	reg[7:0] index = 0;
 	reg[7:0] memory_operand = 0;
+	wire[7:0] data_addr = instr[7:0] + index;
 	always @(negedge clk)
 	begin
-		memory_operand <= data_mem[instr[7:0]];
-		if (instr[10:8] == 3'b011) data_mem[instr[7:0]] <= accumulator;
+		memory_operand <= data_mem[data_addr];
+		if (instr[10:8] == 3'b011) data_mem[data_addr] <= accumulator;
 	end
 
 	wire[7:0] ip_nxt = (instr[10:8] == 3'b100 && accumulator[7]) 	// bl
@@ -32,5 +34,9 @@ module tinyproc(input clk, output reg[7:0] result = 0);
 			3'b010: accumulator <= instr[7:0];	// Load immediate
 			3'b011: if (instr[7:0] == 0) result <= accumulator; // Store
 		endcase
+		if (instr[10:8] == 3'b101)
+			index <= memory_operand;
+		else
+			index <= 0;
 	end
 endmodule
