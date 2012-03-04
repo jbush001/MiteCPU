@@ -6,7 +6,7 @@ res result
 res count
 res scratch
 
-start:	ldi 8	
+start:	ldi 8
 		st count
 
 loop:	ldi 0
@@ -23,10 +23,10 @@ loop:	ldi 0
 		ldi 0
 		sub scratch
 		st count		# count = count - 1
-		ble done
+		bl done
 		
-		ldi 0			# Branch unconditionally
-		ble loop
+		ldi -1			# Branch unconditionally
+		bl loop
 
-done:	ldi 0
-		ble done		# Infinite loop
+done:	ldi -1
+		bl done			# Infinite loop

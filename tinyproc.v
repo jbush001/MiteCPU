@@ -12,7 +12,7 @@ module tinyproc(input clk, output reg[7:0] result = 0);
 		for (i = 0; i < 255; i = i + 1) data_mem[i] = 0;
 	end
 
-	wire[7:0] ip_nxt = (instr[9:8] == 2'b11 && (accumulator[7] || accumulator == 0))	// ble
+	wire[7:0] ip_nxt = (instr[9:8] == 2'b11 && accumulator[7]) 	// bl
 		? instr[7:0] : ip + 1;
 	
 	always @(posedge clk)
@@ -24,7 +24,7 @@ module tinyproc(input clk, output reg[7:0] result = 0);
 			2'b01: accumulator <= accumulator - data_mem[instr[7:0]]; // Sub
 			2'b10: // Store
 			begin	
-				data_mem[instr[7:0]] = accumulator;
+				data_mem[instr[7:0]] <= accumulator;
 				if (instr[7:0] == 0) result <= accumulator;
 			end
 		endcase

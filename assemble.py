@@ -32,7 +32,7 @@ while True:
 			value = (0xff ^ (-value)) + 1	# Convert to twos complement
 
 		code += [ value & 0xff ]
-	elif token == 'ble':
+	elif token == 'bl':
 		target = lexer.get_token()
 		if target in labels:
 			code += [ 0x300 | labels[target] ]
