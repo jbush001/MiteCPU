@@ -4,7 +4,7 @@ accumulator register and 256 memory locations.  An instruction consists of a
 
    ST [location]  - Store the current value of the accumulator at the memory
                     address specified.
-   ADD [location] - Add the accumulator to the value at the location and 
+   SUB [location] - Subtract the value at the location from the accumulator and 
                     store the result in the accumulator
    LDI [value]    - Load an immediate value into the accumulator
    BLE [target]   - If the accumulator is less than or equal to zero, branch
