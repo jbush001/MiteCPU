@@ -1,13 +1,21 @@
-This is a minimal computer with 4 instructions. It has an 8 bit 
-accumulator register and 256 memory locations.  An instruction consists of a 
-2 bit opcode and a 8 bit operand.  There are four instruction types:
+This is a minimal computer. It has an 8 bit accumulator register and 256 memory 
+locations.  Each instruction is 11 bits and has a 3 bit opcode and an 8 bit 
+immediate operand.
 
-   ST [location]  - Store the current value of the accumulator at the memory
-                    address specified.
-   SUB [location] - Subtract the value at the location from the accumulator and 
-                    store the result in the accumulator
-   LDI [value]    - Load an immediate value into the accumulator
-   BL [target]   - If the accumulator is less than zero, branch to the target.
++--------+--------------------+
+| opcode |      operand       |
++--------+--------------------+
+
+Here are the instructions:
+
+000   ADD [location] - Add the value at the location to the accumulator and 
+                       store the result in the accumulator
+001   SUB [location] - Subtract the value at the location from the accumulator and 
+                       store the result in the accumulator
+010   LDI [value]    - Load an immediate value into the accumulator
+011   ST [location]  - Store the current value of the accumulator at the memory
+                       address specified.
+100   BL [target]    - If the accumulator is less than zero, branch to the target.
 
 Additionally, there is a 'res' keyword that will reserve a data variable.  
 

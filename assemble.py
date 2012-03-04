@@ -31,23 +31,25 @@ while True:
 		elif value < 0:
 			value = (0xff ^ (-value)) + 1	# Convert to twos complement
 
-		code += [ value & 0xff ]
+		code += [ 0x200 | (value & 0xff) ]
 	elif token == 'bl':
 		target = lexer.get_token()
 		if target in labels:
-			code += [ 0x300 | labels[target] ]
+			code += [ 0x400 | labels[target] ]
 		else:
 			fixups = [ (len(code), target) ]
-			code += [ 0x300 ]
+			code += [ 0x400 ]
 	elif token == 'st':
-		code += [ 0x200 | globals[lexer.get_token()] ]
+		code += [ 0x300 | globals[lexer.get_token()] ]
 	elif token == 'sub':
 		code += [ 0x100 | globals[lexer.get_token()] ]
+	elif token == 'add':
+		code += [ 0x000 | globals[lexer.get_token()] ]
 	else:
 		raise Exception(str(lexer.lineno) + ': bad instruction' + token)
 
 for addr, label in fixups:
-	code[addr] = (code[addr] & 0x300) | (labels[label] & 0xff)
+	code[addr] = (code[addr] & 0x700) | (labels[label] & 0xff)
 
 for x in code:
 	print '%03x' % x

@@ -10,19 +10,13 @@ start:	ldi 8
 		st count
 
 loop:	ldi 0
-		sub result
-		sub count	
-		st scratch
-		ldi 0			# Negate
-		sub scratch		
+		add result
+		add count	
 		st result
 
-		ldi 1
-		sub count		
-		st scratch
-		ldi 0
-		sub scratch
-		st count		# count = count - 1
+		ldi -1
+		add count
+		st count
 		bl done
 		
 		ldi -1			# Branch unconditionally
