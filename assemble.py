@@ -5,7 +5,7 @@ globals = {}
 next_global = 0
 fixups = []
 code = []
-memory_ops = { 'add' : 0, 'sub' : 0x100, 'st' : 0x300 }
+memory_ops = { 'add' : 0, 'sub' : 0x100, 'st' : 0x300, 'and' : 0x600 }
 
 lexer = shlex.shlex(sys.stdin)
 lexer.commenters = '#'

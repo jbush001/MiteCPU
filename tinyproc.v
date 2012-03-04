@@ -31,6 +31,7 @@ module tinyproc(input clk, output reg[7:0] result = 0);
 		case (instr[10:8])
 			3'b000: accumulator <= accumulator + memory_operand; // Add
 			3'b001: accumulator <= accumulator - memory_operand; // Sub
+			3'b110: accumulator <= accumulator & memory_operand; // And
 			3'b010: accumulator <= instr[7:0];	// Load immediate
 			3'b011: if (instr[7:0] == 0) result <= accumulator; // Store
 		endcase

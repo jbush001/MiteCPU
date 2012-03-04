@@ -12,6 +12,8 @@ Here are the instructions:
                        store the result in the accumulator
 001   SUB [location] - Subtract the value at the location from the accumulator and 
                        store the result in the accumulator
+110   AND [target]   - Logical AND of memory operand with accumulator.  Store result
+                       in accumulator.
 010   LDI [value]    - Load an immediate value into the accumulator
 011   ST [location]  - Store the current value of the accumulator at the memory
                        address specified.
