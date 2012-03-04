@@ -1,5 +1,5 @@
 #
-# Sum the digits 1-8
+# Store values into a memory array
 #
 
 res result
