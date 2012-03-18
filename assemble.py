@@ -15,7 +15,7 @@ while True:
 	token = lexer.get_token()
 	if token == '':
 		break
-		
+
 	if token[-1] == ':':
 		# define label
 		token = token[:-1]
@@ -23,7 +23,8 @@ while True:
 			raise Exception(str(lexer.lineno) + ': redefined label ' + token)
 		else:
 			labels[token] = len(code)
-	elif token == 'res':	# reserve data
+	elif token == 'res':	
+		# reserve data
 		globals[lexer.get_token()] = next_global
 		lookahead = lexer.get_token()
 		if lookahead == ',':
@@ -41,11 +42,12 @@ while True:
 			elif value < 0:
 				value = (0xff ^ (-value)) + 1	# Convert to twos complement
 		else:
-			# Assume this is a data reference
+			# Assume this is loading a data pointer
 			value = globals[operand]
 
 		code += [ 0x200 | (value & 0xff) ]
 	elif token == 'bl':
+		# Branch if accumulator less than zero
 		target = lexer.get_token()
 		if target in labels:
 			code += [ 0x400 | labels[target] ]
