@@ -12,17 +12,21 @@ Here are the instructions:
                        store the result in the accumulator
 001   SUB [location] - Subtract the value at the location from the accumulator and 
                        store the result in the accumulator
-110   AND [target]   - Logical AND of memory operand with accumulator.  Store result
+110   AND [location]   - Logical AND of memory operand with accumulator.  Store result
                        in accumulator.
 010   LDI [value]    - Load an immediate value into the accumulator
 011   ST [location]  - Store the current value of the accumulator at the memory
                        address specified.
 100   BL [target]    - If the accumulator is less than zero, branch to the target.
-101   INDEX [target] - Add the value from a memory location to the next memory acccess address
+101   INDEX [location] - Add the value from a memory location to the next memory acccess address
 
 Additionally, there is a 'res' keyword that will reserve a data variable:
 
    RES <variable_name> [, <number of locations> ] 
+
+Labels (used for branch targets) are declared using a colon, like this:
+
+    topofloop:
 
 To run in simulation (requires iverilog and python 2.7)
 
