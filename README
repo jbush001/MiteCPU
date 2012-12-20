@@ -8,17 +8,18 @@ immediate operand.
 
 Here are the instructions:
 
-000   ADD [location] - Add the value at the location to the accumulator and 
-                       store the result in the accumulator
-001   SUB [location] - Subtract the value at the location from the accumulator and 
-                       store the result in the accumulator
-110   AND [location]   - Logical AND of memory operand with accumulator.  Store result
-                       in accumulator.
-010   LDI [value]    - Load an immediate value into the accumulator
-011   ST [location]  - Store the current value of the accumulator at the memory
-                       address specified.
-100   BL [target]    - If the accumulator is less than zero, branch to the target.
-101   INDEX [location] - Add the value from a memory location to the next memory acccess address
+000   ADD [location]   - Add the value at the location to the accumulator and 
+                         store the result in the accumulator
+001   SUB [location]   - Subtract the value at the location from the accumulator and 
+                         store the result in the accumulator
+110   AND [location]   - Logical AND of memory operand with accumulator.  Store
+                         result in accumulator.
+010   LDI [value]      - Load an immediate value into the accumulator
+011   ST [location]    - Store the current value of the accumulator at the memory
+                         address specified.
+100   BL [target]      - If the accumulator is less than zero, branch to the target.
+101   INDEX [location] - Add the value from a memory location to the memory address
+                         for the next instruction.
 
 Additionally, there is a 'res' keyword that will reserve a data variable:
 
