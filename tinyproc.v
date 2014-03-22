@@ -10,22 +10,19 @@ module tinyproc(input clk, output reg[7:0] result = 0);
 	wire[7:0] data_addr = instr[7:0] + index;
 	integer i;
 
-	initial
-	begin
+	initial begin
 		$readmemh("program.hex", program_mem);
 		for (i = 0; i < 255; i = i + 1) data_mem[i] = 0;
 	end
 
-	always @(negedge clk)
-	begin
+	always @(negedge clk) begin
 		if (instr[10:8] == 3'b011)
 			data_mem[data_addr] <= accumulator;
 		else
 			memory_operand <= data_mem[data_addr];
 	end
 	
-	always @(posedge clk)
-	begin
+	always @(posedge clk) begin
 		ip <= ip_nxt;
 		instr <= program_mem[ip_nxt];
 		index <= (instr[10:8] == 3'b101) ? memory_operand : 0;
