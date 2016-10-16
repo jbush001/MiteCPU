@@ -1,24 +1,25 @@
-This is my attempt to see how small I could make a useful processor. It has an
-8 bit accumulator register and 256 memory locations, each which is 8 bits. This
-is Harvard architecture: instructions are stored in a separate memory space.
-Each instruction is 11 bits and has a 3 bit opcode and an 8 bit immediate
-operand.
+# Introduction
 
-    +--------+--------------------+
-    | opcode |      operand       |
-    +--------+--------------------+
-
-These are the instructions:
+This is my attempt to see how small I could make a useful processor.
+It is Harvard architecture: instructions and data are stored in
+separate memories. Data memory is 8 bits wide and has 256 locations.
+Instruction memory is 11 bits wide. Each instruciton has 11 bits:
+a 3 bit opcode and 8 bit operand. Here are the opcodes:
 
 | Opcode | Mnemonic | Description |
 |----|----|----|
-| 000 | ADD [location]   | Add the value at the memory location to the accumulator |
-| 001 | SUB [location]   | Subtract the value at the memory location from the accumulator and store the result in the accumulator |
-| 110 | AND [location]   | Logical AND of memory operand with accumulator.  Store result in accumulator. |
-| 010 | LDI [value]      | Load an immediate value into the accumulator |
-| 011 | ST [location]    | Store the current value of the accumulator at the memory address specified. |
-| 100 | BL [target]      | If the accumulator is less than zero, branch to the target. |
+| 000 | ADD [location]   | Add the value at the memory location referenced by the operand to the accumulator |
+| 001 | SUB [location]   | Subtract the value at the memory location referenced by the operand from the accumulator and store the result in the accumulator |
+| 110 | AND [location]   | Logical AND of memory location with accumulator.  Store result in accumulator. |
+| 010 | LDI [value]      | Copy operand value into accumulator |
+| 011 | ST [location]    | Store the current value of the accumulator at the memory location |
+| 100 | BL [target]      | If the accumulator is less than zero, branch to the target PC. |
 | 101 | INDEX [location] | Read the the value from a memory location and add it to the memory address of the next instruction. |
+
+Labels are declared using a colon. The name can be used as a branch target:
+
+    topofloop:
+        bl topofloop
 
 The `res` keyword reserves a range of addresses in data memory and assigns a
 variable name to it, which can be used as an instruction operand
@@ -30,14 +31,19 @@ For example:
     res counterval
     add counterval
 
-Labels are declared using a colon. The name can be used as a branch target:
+# Running
+## Prerequisites:
 
-    topofloop:
-        bl topofloop
+- [Icarus Verilog](http://iverilog.icarus.com/)
+- Python 2.7
 
-To run in simulation (requires iverilog and python 2.7)
+## Running
+
+To run in simulation:
 
     ./run
+
+This will load the program test.asm
 
 To run on FPGA, first compile the program, open tinyproc.qpf in
 (Quartus)[https://www.altera.com/downloads/download-center.html]
