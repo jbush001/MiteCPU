@@ -8,9 +8,9 @@ a 3 bit opcode and 8 bit operand. Here are the opcodes:
 
 | Opcode | Mnemonic | Description |
 |----|----|----|
-| 000 | ADD [location]   | Add the value at the memory location referenced by the operand to the accumulator |
-| 001 | SUB [location]   | Subtract the value at the memory location referenced by the operand from the accumulator and store the result in the accumulator |
-| 110 | AND [location]   | Logical AND of memory location with accumulator.  Store result in accumulator. |
+| 000 | ADD [location]   | Add the value at the memory location referenced by the operand to the accumulator and store the result back into the accumulator |
+| 001 | SUB [location]   | Subtract memory location from the accumulator and store the result in the accumulator |
+| 110 | AND [location]   | Perform logical AND of memory location with accumulator and store result in accumulator. |
 | 010 | LDI [value]      | Copy operand value into accumulator |
 | 011 | ST [location]    | Store the current value of the accumulator at the memory location |
 | 100 | BL [target]      | If the accumulator is less than zero, branch to the target PC. |
@@ -32,12 +32,12 @@ For example:
     add counterval
 
 # Running
-## Prerequisites:
+
+**Prerequisites:**
 
 - [Icarus Verilog](http://iverilog.icarus.com/)
 - Python 2.7
 
-## Running
 
 To run in simulation:
 
