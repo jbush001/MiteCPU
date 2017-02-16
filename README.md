@@ -48,6 +48,6 @@ This will load the program test.asm
 To run on FPGA, first compile the program, open tinyproc.qpf in
 (Quartus)[https://www.altera.com/downloads/download-center.html]
 
-    python ./compile.py < [source file] > program.hex
+    python ./assemble.py < [source file] > program.hex
 
 The design must be resynthesized whenever the program is changed.
